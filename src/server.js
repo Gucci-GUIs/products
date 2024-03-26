@@ -29,8 +29,8 @@ app.use('/api/products', productStyles);
 // app.use('/api/products', productRoutes); // Mount product routes under /api/products
 
 // Define port
-// const PORT = process.env.PORT || 3000;
-const PORT = 3001;
+const PORT = process.env.PORT || 3000;
+// const PORT = 3000;
 
 // Start the server
 app.listen(PORT, () => {
