@@ -1,6 +1,7 @@
 // Import required modules
 const express = require('express');
 const dotenv = require('dotenv');
+const path = require('path');
 const dbConfig = require('../config/dbConfig'); // Corrected path to dbConfig
 const routes = require('./routes/index'); // Corrected path to routes
 const product = require('./routes/products'); // New import for product routes
@@ -22,6 +23,9 @@ app.use(morgan('dev'));
 
 // Middleware to parse JSON bodies
 app.use(express.json());
+
+
+app.use(express.static(path.join(__dirname, '../public/')));
 
 // Use routes
 app.use('/api', routes);
