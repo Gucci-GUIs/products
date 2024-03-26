@@ -6,10 +6,10 @@ const photoSchema = new mongoose.Schema({
     thumbnail_urls: String
 }, { _id: false }); // Exclude _id field
 
-// const skuSchema = new mongoose.Schema({
-//     size: String,
-//     quantity: Number
-// }, { _id: false }); // Exclude _id field
+const skuSchema = new mongoose.Schema({
+    size: String,
+    quantity: Number
+}, { _id: false }); // Exclude _id field
 
 // Define schema for Styles collection
 const styleSchema = new mongoose.Schema({
