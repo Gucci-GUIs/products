@@ -12,6 +12,7 @@ const productSchema = new mongoose.Schema({
   default_price: String,
   created_at: Date,
   updated_at: Date,
+  related: [], // if we have String instead, mongo would return an array of strings for the related ids
   features: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Feature' }] // Reference to Feature schema
 });
 

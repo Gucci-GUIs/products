@@ -7,3 +7,4 @@ node_modules/
 # Exclude log files
 *.log
 
+/home/raul/hr/products-server/src/database/seeders
