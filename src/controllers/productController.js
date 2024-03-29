@@ -5,13 +5,20 @@ const Feature = require('../database/models/features');
 
 const getProductById = async (req, res) => {
   const productId = req.params.id;
+  const isRelatedEndpoint = req.path.includes('related');
 
   try {
-    // Query for the product using the id field, excluding __v and _id fields
+    // Query for the product using the id field
     const product = await Product.findOne({ id: productId }).select('-__v -_id');
+    // const product = await Product.findOne({ id: productId }).populate('related').select('-__v -_id');
 
     if (!product) {
       return res.status(404).json({ error: 'Product not found' });
+    }
+
+    if (isRelatedEndpoint) {
+      // Return only the related IDs
+      return res.json(product.related || []);
     }
 
     // Query for features associated with the product id
@@ -20,10 +27,11 @@ const getProductById = async (req, res) => {
     // Combine product details with features
     const productWithFeatures = { ...product.toObject(), features };
 
-    res.json(productWithFeatures);
+    // Return the product with features
+    return res.json(productWithFeatures);
   } catch (error) {
     console.error('Error fetching product:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    return res.status(500).json({ error: 'Internal server error' });
   }
 };
 

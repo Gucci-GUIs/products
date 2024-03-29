@@ -11,4 +11,7 @@ router.get('/:id', productController.getProductById);
 // Route to retrieve the list of products with pagination
 router.get('/', productsController.getProducts);
 
+// Route to get related products by product ID
+router.get('/:id/related', productController.getProductById);
+
 module.exports = router;
