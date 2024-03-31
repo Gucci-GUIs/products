@@ -2,9 +2,9 @@ config:
   target: "http://localhost:3000" # Replace with your API endpoint
   phases:
     - duration: 5 # Duration of the test in seconds
-      arrivalRate: 1 # Number of arrivals per second
+      arrivalRate: 10 # Number of arrivals per second
 
 scenarios:
   - flow:
       - get:
-          url: "/api/products/5" # Replace the range with your actual product IDs
+          url: "/api/products/5000" # Replace the range with your actual product IDs

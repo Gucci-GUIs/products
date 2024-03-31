@@ -73,6 +73,27 @@ const getStylesByProductId = async (req, res) => {
   }
 };
 
+// db.createUser({
+//   user: "raul",
+//   pwd: "Efat_2887",
+//   roles: ["readWriteAnyDatabase", "userAdminAnyDatabase"]
+// })
+// db.createUser({
+//   user: "troll",
+//   pwd: "Efat_2887",
+//   roles: ["readWrite"]
+// })
+// db.grantRolesToUser(
+//   "raul",
+//   [
+//     { role: "readWrite", db: "products" },
+//   ]
+// )
+// db.grantRolesToUser("raul", [{ role: "readWriteAnyDatabase", db: "products" }])
+
+// mongosh --port 27017 -u "raul" \
+// --authenticationDatabase "products" -p "Efat_2887"
+
 
 module.exports = { getStylesByProductId };
 

@@ -2,15 +2,23 @@
 
 const Product = require('../database/models/products');
 const Feature = require('../database/models/features');
+const NodeCache = require('node-cache');
+const cache = new NodeCache();
 
 const getProductById = async (req, res) => {
   const productId = req.params.id;
   const isRelatedEndpoint = req.path.includes('related');
+  const cacheKey = `product_${productId}`;
 
   try {
+    // Check if the product data exists in the cache
+    const cachedProduct = cache.get(cacheKey);
+    if (cachedProduct) {
+      return res.json(cachedProduct);
+    }
+
     // Query for the product using the id field
     const product = await Product.findOne({ id: productId }).select('-__v -_id');
-    // const product = await Product.findOne({ id: productId }).populate('related').select('-__v -_id');
 
     if (!product) {
       return res.status(404).json({ error: 'Product not found' });
@@ -27,6 +35,9 @@ const getProductById = async (req, res) => {
     // Combine product details with features
     const productWithFeatures = { ...product.toObject(), features };
 
+    // Cache the product data
+    cache.set(cacheKey, productWithFeatures);
+
     // Return the product with features
     return res.json(productWithFeatures);
   } catch (error) {
@@ -36,6 +47,7 @@ const getProductById = async (req, res) => {
 };
 
 module.exports = { getProductById };
+
 
 
 
